@@ -1,5 +1,5 @@
 import { getTasks, saveTasks } from "./storage.js";
-import { renderTasks, updateStats } from "./ui.js";
+import { renderTasks, updateStats, showToast } from "./ui.js";
 
 let tasks = getTasks();
 
@@ -14,14 +14,6 @@ const searchInput = document.getElementById("searchInput");
 function getFiltered() {
 
     let result = tasks;
-
-    if (filter === "completed") {
-        result = result.filter(t => t.completed);
-    }
-
-    if (filter === "pending") {
-        result = result.filter(t => !t.completed);
-    }
 
     return result.filter(t =>
         t.title.toLowerCase().includes(search.toLowerCase())
@@ -48,7 +40,37 @@ btn.onclick = () => {
 
     saveTasks(tasks);
     render();
+
+    showToast("Added");
 };
+
+container.addEventListener("click", (e) => {
+
+    const id = Number(e.target.dataset.id);
+
+    if (e.target.classList.contains("delete")) {
+        tasks = tasks.filter(t => t.id !== id);
+    }
+
+    if (e.target.classList.contains("edit")) {
+
+        const task = tasks.find(t => t.id === id);
+
+        const newTitle = prompt("Edit", task.title);
+
+        if (newTitle) task.title = newTitle;
+    }
+
+    if (e.target.type === "checkbox") {
+
+        tasks = tasks.map(t =>
+            t.id === id ? { ...t, completed: !t.completed } : t
+        );
+    }
+
+    saveTasks(tasks);
+    render();
+});
 
 searchInput.oninput = (e) => {
     search = e.target.value;
