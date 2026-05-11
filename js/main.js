@@ -1,19 +1,42 @@
 import { getTasks, saveTasks } from "./storage.js";
-import { renderTasks } from "./ui.js";
+import { renderTasks, updateStats } from "./ui.js";
 
 let tasks = getTasks();
+
+let filter = "all";
+let search = "";
 
 const input = document.getElementById("taskInput");
 const btn = document.getElementById("addBtn");
 const container = document.getElementById("tasksContainer");
+const searchInput = document.getElementById("searchInput");
+
+function getFiltered() {
+
+    let result = tasks;
+
+    if (filter === "completed") {
+        result = result.filter(t => t.completed);
+    }
+
+    if (filter === "pending") {
+        result = result.filter(t => !t.completed);
+    }
+
+    return result.filter(t =>
+        t.title.toLowerCase().includes(search.toLowerCase())
+    );
+}
 
 function render() {
-    renderTasks(tasks, container);
+
+    const data = getFiltered();
+
+    renderTasks(data, container);
+    updateStats(tasks);
 }
 
 btn.onclick = () => {
-
-    if (!input.value) return;
 
     tasks.push({
         id: Date.now(),
@@ -27,22 +50,9 @@ btn.onclick = () => {
     render();
 };
 
-container.addEventListener("click", (e) => {
-
-    const id = Number(e.target.dataset.id);
-
-    if (e.target.classList.contains("delete")) {
-        tasks = tasks.filter(t => t.id !== id);
-    }
-
-    if (e.target.type === "checkbox") {
-        tasks = tasks.map(t =>
-            t.id === id ? { ...t, completed: !t.completed } : t
-        );
-    }
-
-    saveTasks(tasks);
+searchInput.oninput = (e) => {
+    search = e.target.value;
     render();
-});
+};
 
 render();
