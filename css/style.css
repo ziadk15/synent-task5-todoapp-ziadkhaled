@@ -1,25 +1,173 @@
-body {
-    font-family: Arial;
-    background: #0f172a;
-    color: white;
-    display: flex;
-    justify-content: center;
-    padding-top: 50px;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    transition:0.3s;
 }
 
-.container {
-    width: 400px;
+body{
+    font-family:Arial, sans-serif;
+
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+
+    padding-top:80px;
+
+    background: linear-gradient(
+        135deg,
+        #0f172a,
+        #111827,
+        #1e293b
+    );
+
+    color:white;
 }
 
-.task-input {
-    display: flex;
-    gap: 10px;
+.container{
+
+    width:100%;
+    max-width:500px;
+
+    background:rgba(30,41,59,0.9);
+
+    backdrop-filter: blur(10px);
+
+    padding:30px;
+
+    border-radius:20px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,0.4);
 }
 
-.task {
-    background: #334155;
-    margin-top: 10px;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
+h1{
+    text-align:center;
+
+    margin-bottom:25px;
+
+    font-size:40px;
+}
+
+.input-box{
+    display:flex;
+
+    gap:10px;
+
+    margin-bottom:20px;
+}
+
+input{
+    flex:1;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:12px;
+
+    outline:none;
+
+    font-size:16px;
+}
+
+button{
+    border:none;
+
+    padding:14px 18px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    background:#3b82f6;
+
+    color:white;
+
+    font-size:15px;
+
+    font-weight:bold;
+}
+
+button:hover{
+    background:#2563eb;
+
+    transform:translateY(-2px);
+}
+
+.stats{
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-bottom:20px;
+
+    color:#cbd5e1;
+}
+
+ul{
+    list-style:none;
+}
+
+li{
+    background:#334155;
+
+    margin-bottom:12px;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+}
+
+.task-text{
+    cursor:pointer;
+}
+
+.completed .task-text{
+    text-decoration:line-through;
+
+    opacity:0.6;
+}
+
+.delete-btn{
+    background:#ef4444;
+}
+
+.delete-btn:hover{
+    background:#dc2626;
+}
+
+.clear-btn{
+    width:100%;
+
+    margin-top:15px;
+
+    background:#f59e0b;
+}
+
+.clear-btn:hover{
+    background:#d97706;
+}
+
+@media(max-width:600px){
+
+    body{
+        padding:20px;
+    }
+
+    .input-box{
+        flex-direction:column;
+    }
+
+    button{
+        width:100%;
+    }
+
 }

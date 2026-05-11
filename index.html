@@ -1,31 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>To-Do App</title>
+
     <link rel="stylesheet" href="./css/style.css">
 </head>
+
 <body>
 
-<div class="container">
+    <div class="container">
 
-    <h1>To-Do List</h1>
+        <h1>To-Do List</h1>
 
-    <div class="task-input">
-        <input id="taskInput" placeholder="Add task">
-        <button id="addBtn">+</button>
+        <p class="subtitle">
+            Organize your daily tasks easily
+        </p>
+
+        <div class="task-input">
+
+            <input 
+                type="text"
+                id="taskInput" 
+                placeholder="Add a new task..."
+                autocomplete="off"
+            >
+
+            <button id="addBtn">
+                Add
+            </button>
+
+        </div>
+
+        <div class="stats">
+
+            <p>
+                Total:
+                <span id="totalTasks">0</span>
+            </p>
+
+            <p>
+                Done:
+                <span id="completedTasks">0</span>
+            </p>
+
+        </div>
+
+        <div id="tasksContainer"></div>
+
+        <button id="clearBtn" class="clear-btn">
+            Clear All Tasks
+        </button>
+
     </div>
 
-    <div id="tasksContainer"></div>
-
-    <div class="stats">
-        <p>Total: <span id="totalTasks">0</span></p>
-        <p>Done: <span id="completedTasks">0</span></p>
-    </div>
-
-</div>
-
-<script type="module" src="./js/main.js"></script>
+    <script type="module" src="./js/main.js"></script>
 
 </body>
+
 </html>
