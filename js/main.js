@@ -10,6 +10,7 @@ const input = document.getElementById("taskInput");
 const btn = document.getElementById("addBtn");
 const container = document.getElementById("tasksContainer");
 const searchInput = document.getElementById("searchInput");
+const clearBtn = document.getElementById("clearBtn");
 
 function getFiltered() {
 
@@ -67,6 +68,14 @@ container.addEventListener("click", (e) => {
             t.id === id ? { ...t, completed: !t.completed } : t
         );
     }
+
+    clearBtn.addEventListener("click", () => {
+
+    tasks = [];
+
+    renderTasks();
+
+});
 
     saveTasks(tasks);
     render();
